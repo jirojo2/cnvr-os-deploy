@@ -41,10 +41,10 @@ neutron lbaas-loadbalancer-create --name lb1 Subnet1
 # Create virtual machines
 mkdir -p /root/keys
 openstack keypair create scenario > /root/keys/scenario
-openstack server create --flavor m1.smaller --image xenial-server-cloudimg-amd64-vnx adm --nic net-id=Net1 --key-name scenario --security-group open --user-data cloud-init/adm/user_data
-openstack server create --flavor m1.smaller --image xenial-server-cloudimg-amd64-vnx db1 --nic net-id=Net1 --key-name scenario --security-group open --user-data cloud-init/db/user_data
-openstack server create --flavor m1.smaller --image xenial-server-cloudimg-amd64-vnx s1 --nic net-id=Net1 --key-name scenario --security-group open --user-data cloud-init/www/user_data
-openstack server create --flavor m1.smaller --image xenial-server-cloudimg-amd64-vnx s2 --nic net-id=Net1 --key-name scenario --security-group open --user-data cloud-init/www/user_data
+openstack server create --flavor m1.smaller --image xenial-server-cloudimg-amd64-vnx adm --nic net-id=Net1 --key-name scenario --security-group open --user-data cnvr-os-deploy/cloud-init/adm/user_data
+openstack server create --flavor m1.smaller --image xenial-server-cloudimg-amd64-vnx db1 --nic net-id=Net1 --key-name scenario --security-group open --user-data cnvr-os-deploy/cloud-init/db/user_data
+openstack server create --flavor m1.smaller --image xenial-server-cloudimg-amd64-vnx s1 --nic net-id=Net1 --key-name scenario --security-group open --user-data cnvr-os-deploy/cloud-init/www/user_data
+openstack server create --flavor m1.smaller --image xenial-server-cloudimg-amd64-vnx s2 --nic net-id=Net1 --key-name scenario --security-group open --user-data cnvr-os-deploy/cloud-init/www/user_data
 
 # IPs
 IP_LB=10.1.1.3
