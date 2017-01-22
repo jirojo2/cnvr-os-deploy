@@ -5,6 +5,18 @@
 # ssh root@controller 'bash -s' < create-scenario.sh
 #
 
+# Clone / pull git repo
+if [[ -f cnvr-os-deploy ]]
+then
+    echo "Updating deployment scripts..."
+    pushd cnv-os-deploy
+    git pull
+    popd
+else
+    echo "Cloning deployment scripts..."
+    git clone https://github.com/jirojo2/cnvr-os-deploy.git
+fi
+
 # Create ExtNet as admin
 source /root/bin/admin-openrc.sh
 neutron net-create ExtNet --provider:physical_network external --provider:network_type flat --router:external --shared
@@ -29,10 +41,10 @@ neutron lbaas-loadbalancer-create --name lb1 Subnet1
 # Create virtual machines
 mkdir -p /root/keys
 openstack keypair create scenario > /root/keys/scenario
-openstack server create --flavor m1.smaller --image xenial-server-cloudimg-amd64-vnx adm --nic net-id=Net1 --key-name scenario --security-group open
-openstack server create --flavor m1.smaller --image xenial-server-cloudimg-amd64-vnx db1 --nic net-id=Net1 --key-name scenario --security-group open
-openstack server create --flavor m1.smaller --image xenial-server-cloudimg-amd64-vnx s1 --nic net-id=Net1 --key-name scenario --security-group open
-openstack server create --flavor m1.smaller --image xenial-server-cloudimg-amd64-vnx s2 --nic net-id=Net1 --key-name scenario --security-group open
+openstack server create --flavor m1.smaller --image xenial-server-cloudimg-amd64-vnx adm --nic net-id=Net1 --key-name scenario --security-group open --user-data cloud-init/adm/user_data
+openstack server create --flavor m1.smaller --image xenial-server-cloudimg-amd64-vnx db1 --nic net-id=Net1 --key-name scenario --security-group open --user-data cloud-init/db/user_data
+openstack server create --flavor m1.smaller --image xenial-server-cloudimg-amd64-vnx s1 --nic net-id=Net1 --key-name scenario --security-group open --user-data cloud-init/www/user_data
+openstack server create --flavor m1.smaller --image xenial-server-cloudimg-amd64-vnx s2 --nic net-id=Net1 --key-name scenario --security-group open --user-data cloud-init/www/user_data
 
 # IPs
 IP_LB=10.1.1.3

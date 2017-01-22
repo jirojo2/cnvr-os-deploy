@@ -1,8 +1,14 @@
-#cloud-config
+#!/bin/bash
+echo "cloud-init cnvr running on hostname $(uname -n)"
 
-apt_update: true
-apt_upgrade: true
+curl -sL https://deb.nodesource.com/setup_7.x | bash -
+apt-get install -y nodejs
 
-runcmd:
-  - curl -sL https://deb.nodesource.com/setup_7.x | bash -
-  - apt-get install -y nodejs
+git clone https://github.com/jirojo2/cnvr-os-deploy.git /srv
+
+pushd /srv/www
+npm install
+npm install -g forever
+forever start app.js
+popd
+exit 0
