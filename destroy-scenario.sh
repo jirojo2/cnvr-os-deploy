@@ -39,3 +39,10 @@ neutron net-delete ExtNet
 
 # Destroy security group
 openstack security group delete open
+
+# Destroy the firewall
+neutron firewall-destroy fw1
+neutron firewall-policy-destroy fw-policy1
+neutron firewall-rule-destroy fw-rule-web
+neutron firewall-rule-destroy fw-rule-int
+neutron firewall-rule-destroy fw-rule-adm
