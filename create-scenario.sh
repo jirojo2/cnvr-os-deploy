@@ -66,7 +66,7 @@ neutron lbaas-pool-create --lb-algorithm ROUND_ROBIN --listener listener1 --prot
 sleep 2
 neutron lbaas-member-create --subnet Subnet1 --address $IP_S1 --protocol-port 80 pool1
 neutron lbaas-member-create --subnet Subnet1 --address $IP_S2 --protocol-port 80 pool1
-neutron lbaas-healthmonitor-create --delay 3 --type HTTP --max-retries 3 --timeout 3 --pool pool1 --name hm1
+neutron lbaas-healthmonitor-create --delay 30 --type HTTP --max-retries 3 --timeout 30 --pool pool1 --name hm1
 
 # Assign floating IP address to lb
 LB_ID=$( neutron lbaas-loadbalancer-list -c id -f value )
