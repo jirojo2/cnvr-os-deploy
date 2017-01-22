@@ -12,3 +12,5 @@ for server in $( openstack server list -c ID -f value --name s3 )
 do
     openstack server delete $server
 done
+
+neutron lbaas-member-delete lb-s3 pool1
