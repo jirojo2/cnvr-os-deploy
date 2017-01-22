@@ -6,10 +6,10 @@
 #
 
 # Clone / pull git repo
-if [[ -f cnvr-os-deploy ]]
+if [ -d cnvr-os-deploy ]
 then
     echo "Updating deployment scripts..."
-    pushd cnv-os-deploy
+    pushd cnvr-os-deploy
     git pull
     popd
 else
