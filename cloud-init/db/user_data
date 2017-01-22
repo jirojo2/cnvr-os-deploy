@@ -10,3 +10,7 @@ apt_sources:
 
 packages:
   - mongodb-org
+
+runcmd:
+  - systemctl enable mongod.service
+  - systemctl start mongod.service
