@@ -1,0 +1,12 @@
+#cloud-config
+
+apt_update: true
+apt_upgrade: true
+
+apt_sources:
+  - source: "deb http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.4 multiverse"
+    keyid: 0C49F3730359A14518585931BC711F9BA15703C6
+    filename: mongodb.list
+
+packages:
+  - mongodb-org

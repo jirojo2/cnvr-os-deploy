@@ -1,0 +1,8 @@
+#cloud-config
+
+apt_update: true
+apt_upgrade: true
+
+runcmd:
+  - curl -sL https://deb.nodesource.com/setup_7.x | bash -
+  - apt-get install -y nodejs
